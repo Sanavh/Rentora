@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Buildings List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 70%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a {
+            text-decoration: none;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<h2>All Buildings</h2>
+
+<a th:href="@{/buildings/new}">Add New Building</a>
+<br/><br/>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Total Rooms</th>
+			<th>Action Items</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="b : ${buildings}">
+            <td th:text="${b.id}"></td>
+            <td th:text="${b.name}">Sample Name</td>
+            <td th:text="${b.address}">Sample Address</td>
+            <td th:text="${b.totalRooms}">5</td>
+			<td>
+				<a th:href="@{/buildings/edit/{id}(id=${b.id})}">Edit</a> | 
+				<a th:href="@{/buildings/delete/{id}(id=${b.id})}" onclick="return confirm('Are you sure you want to delete this record')">Delete</a>
+			</td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <title>Room Form</title>
+	</head>
+	<body>
+		<h2>Add New Rooms</h2>
+		<form th:action="@{/rooms/save}" th:object="${room}" method="post">
+			
+			<input type="hidden" th:field="*{id}" />
+			
+			<label>Room Number:</label>
+			<input type="number" th:field="*{roomNumber}" required />
+			<br>
+			
+			<label>Floor:</label>
+			<input type="number" th:field="*{floor}" required />
+			<br>
+			
+			<label>Room Status: </label>
+			<select th:field="*{status}">
+				<option value = "AVAILABLE">AVAILABLE</option>
+				<option value = "OCCUPIED">OCCUPIED</option>
+			</select>
+			<br>
+			
+			<select th:field="*{building.id}">
+				<option value ="">-- SELECT BUILDING --</option>
+				<option th:each="b:${buildings}"
+						th:value="${b.id}"
+						th:text="${b.name}">
+				</option>
+			</select>
+			<br><br>
+			
+			<button type="submit">Save Room</button>
+			
+		</form>
+	</body>
+</html>

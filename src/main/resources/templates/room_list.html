@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <title>Room List</title>
+	</head>
+	<body>
+		<h2>List of All Rooms</h2>
+		
+		<a href="/rooms/new">Add New Room</a>
+		
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Room ID</th>
+					<th>Room Number</th>
+					<th>Floor</th>
+					<th>Room Status</th>
+					<th>Building Name</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="r:${rooms}">
+					<td th:text="${r.id}"></td>
+					<td th:text="${r.roomNumber}"></td>
+					<td th:text="${r.floor}"></td>
+					<td th:text="${r.status}"></td>
+					<td th:text="${r.building.name}"></td>
+					
+					<td>
+						<a th:href="@{rooms/edit/{id}(id=${r.id})}">Edit</a> | 
+						<a th:href="@{/rooms/delete/{id}(id=${r.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</body>
+</html>
